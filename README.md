@@ -20,7 +20,7 @@ It implements a full odometry stack (wheel → EKF yaw fusion → ICP scan match
   - includes a **static TF** `base_link_icp → base_scan` (dataset doesn’t provide `/tf_static`)
 
 ## Workspace structure
-
+'''text
 fra532_ws-main/
 ├── src/
 │   └── lab1_amr/                 # main package (ament_python)
@@ -43,6 +43,7 @@ fra532_ws-main/
 │   ├── fibo_floor3_seq01/
 │   └── fibo_floor3_seq02/
 └── (build/, install/, log/ may exist if previously built)
+'''text
 Requirements
 
 Ubuntu 22.04
