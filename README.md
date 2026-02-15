@@ -21,7 +21,6 @@ It implements a full odometry stack (wheel → EKF yaw fusion → ICP scan match
 
 ## Workspace structure
 
-```text
 fra532_ws-main/
 ├── src/
 │   └── lab1_amr/                 # main package (ament_python)
