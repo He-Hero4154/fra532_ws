@@ -1,0 +1,16 @@
+running develop
+running egg_info
+writing lab1_amr.egg-info/PKG-INFO
+writing dependency_links to lab1_amr.egg-info/dependency_links.txt
+writing entry points to lab1_amr.egg-info/entry_points.txt
+writing requirements to lab1_amr.egg-info/requires.txt
+writing top-level names to lab1_amr.egg-info/top_level.txt
+reading manifest file 'lab1_amr.egg-info/SOURCES.txt'
+writing manifest file 'lab1_amr.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/hero/fra532_ws/install/lab1_amr/lib/python3.10/site-packages/lab1-amr.egg-link (link to .)
+Installing ekf_yaw_fusion script to /home/hero/fra532_ws/install/lab1_amr/lib/lab1_amr
+Installing wheel_odom script to /home/hero/fra532_ws/install/lab1_amr/lib/lab1_amr
+
+Installed /home/hero/fra532_ws/build/lab1_amr
+running symlink_data

@@ -1,0 +1,14 @@
+{
+  "python.analysis.extraPaths": [
+    "/opt/ros/${env:ROS_DISTRO}/lib/python3.10/site-packages",
+    "${workspaceFolder}/install"
+  ],
+  "terminal.integrated.env.linux": {
+    "RCUTILS_COLORIZED_OUTPUT": "1"
+  },
+  "files.exclude": {
+    "**/build": true,
+    "**/install": false,
+    "**/log": true
+  }
+}

@@ -1,0 +1,275 @@
+import math
+
+import rclpy
+from rclpy.node import Node
+from rclpy.time import Time
+
+from nav_msgs.msg import Odometry, Path
+from sensor_msgs.msg import Imu
+from geometry_msgs.msg import TransformStamped, PoseStamped
+from tf2_ros import TransformBroadcaster
+
+from tf_transformations import euler_from_quaternion, quaternion_from_euler
+
+
+def wrap_to_pi(a: float) -> float:
+    return (a + math.pi) % (2.0 * math.pi) - math.pi
+
+
+class EkfYawFusion(Node):
+    def __init__(self):
+        super().__init__('ekf_yaw_fusion')
+
+        # ===== Params =====
+        self.declare_parameter('odom_frame', 'odom')
+        self.declare_parameter('base_frame', 'base_link_ekf')
+
+        # process noise (tune ได้)
+        self.declare_parameter('q_xy_base', 0.01)      # m (std) ต่อ step
+        self.declare_parameter('q_xy_scale', 0.02)     # m (std) ต่อ |ds|
+        self.declare_parameter('q_yaw_base', 0.02)     # rad (std) ต่อ step
+        self.declare_parameter('q_yaw_scale', 0.05)    # rad (std) ต่อ |dth|
+
+        # measurement noise yaw from IMU
+        self.declare_parameter('r_yaw', 0.05)          # rad (std)
+
+        self.declare_parameter('publish_path', True)
+
+        self.odom_frame = str(self.get_parameter('odom_frame').value)
+        self.base_frame = str(self.get_parameter('base_frame').value)
+
+        self.q_xy_base = float(self.get_parameter('q_xy_base').value)
+        self.q_xy_scale = float(self.get_parameter('q_xy_scale').value)
+        self.q_yaw_base = float(self.get_parameter('q_yaw_base').value)
+        self.q_yaw_scale = float(self.get_parameter('q_yaw_scale').value)
+
+        self.r_yaw = float(self.get_parameter('r_yaw').value)
+        self.publish_path = bool(self.get_parameter('publish_path').value)
+
+        # ===== EKF state =====
+        self.x = 0.0
+        self.y = 0.0
+        self.yaw = 0.0
+
+        # Covariance P (เริ่มต้นให้ไม่มั่นใจพอสมควร)
+        self.P = [
+            [0.5**2, 0.0,   0.0],
+            [0.0,   0.5**2, 0.0],
+            [0.0,   0.0,   (20.0*math.pi/180.0)**2],
+        ]
+
+        # wheel odom prev (สำหรับหา ds, dth)
+        self.w_prev = None  # (t, xw, yw, yaww)
+
+        # latest IMU yaw
+        self.imu_yaw = None
+        self.imu_t = None
+
+        # ===== ROS I/O =====
+        self.sub_odom = self.create_subscription(Odometry, '/odom_wheel', self.on_odom_wheel, 50)
+        self.sub_imu = self.create_subscription(Imu, '/imu', self.on_imu, 50)
+
+        self.odom_pub = self.create_publisher(Odometry, '/odom_ekf', 20)
+        self.path_pub = self.create_publisher(Path, '/path_ekf', 5)
+        self.tf_br = TransformBroadcaster(self)
+
+        self.path_msg = Path()
+        self.path_msg.header.frame_id = self.odom_frame
+
+        self.get_logger().info(
+            f"ekf_yaw_fusion up ✅ frames: {self.odom_frame} -> {self.base_frame}, "
+            f"q_xy_base={self.q_xy_base}, q_yaw_base={self.q_yaw_base}, r_yaw={self.r_yaw}"
+        )
+
+    # ---------- IMU callback (measurement source) ----------
+    def on_imu(self, msg: Imu):
+        q = msg.orientation
+        _, _, yaw = euler_from_quaternion([q.x, q.y, q.z, q.w])
+        self.imu_yaw = wrap_to_pi(float(yaw))
+        self.imu_t = Time.from_msg(msg.header.stamp)
+
+        # ทำ update ได้ทันที (ถ้าเราเคย predict แล้ว)
+        self.measurement_update(self.imu_yaw)
+        self.publish_state(msg.header.stamp)
+
+    # ---------- Odom wheel callback (prediction source) ----------
+    def on_odom_wheel(self, msg: Odometry):
+        t = Time.from_msg(msg.header.stamp)
+        xw = float(msg.pose.pose.position.x)
+        yw = float(msg.pose.pose.position.y)
+
+        q = msg.pose.pose.orientation
+        _, _, yaww = euler_from_quaternion([q.x, q.y, q.z, q.w])
+        yaww = wrap_to_pi(float(yaww))
+
+        if self.w_prev is None:
+            self.w_prev = (t, xw, yw, yaww)
+            # init state ให้เริ่มจาก wheel odom ก่อน
+            self.x, self.y, self.yaw = xw, yw, yaww
+            self.publish_state(msg.header.stamp)
+            return
+
+        t_prev, xw_prev, yw_prev, yaww_prev = self.w_prev
+        dt = (t.nanoseconds - t_prev.nanoseconds) * 1e-9
+        if dt <= 0.0 or dt < 1e-6:
+            self.w_prev = (t, xw, yw, yaww)
+            return
+
+        dx = xw - xw_prev
+        dy = yw - yw_prev
+        dth = wrap_to_pi(yaww - yaww_prev)
+
+        # project motion into previous heading (forward distance)
+        ds = math.cos(yaww_prev) * dx + math.sin(yaww_prev) * dy
+
+        self.prediction_update(ds, dth)
+
+        # optional: ถ้ามี imu ล่าสุดอยู่แล้ว จะ update ทับในจังหวะนี้ก็ได้
+        if self.imu_yaw is not None:
+            self.measurement_update(self.imu_yaw)
+
+        self.publish_state(msg.header.stamp)
+
+        self.w_prev = (t, xw, yw, yaww)
+
+    # ---------- EKF: Prediction ----------
+    def prediction_update(self, ds: float, dth: float):
+        # state prediction
+        x = self.x + ds * math.cos(self.yaw)
+        y = self.y + ds * math.sin(self.yaw)
+        yaw = wrap_to_pi(self.yaw + dth)
+
+        # Jacobian F
+        F = [
+            [1.0, 0.0, -ds * math.sin(self.yaw)],
+            [0.0, 1.0,  ds * math.cos(self.yaw)],
+            [0.0, 0.0,  1.0],
+        ]
+
+        # Process noise Q (std)
+        sig_xy = self.q_xy_base + self.q_xy_scale * abs(ds)
+        sig_yaw = self.q_yaw_base + self.q_yaw_scale * abs(dth)
+
+        Q = [
+            [sig_xy**2, 0.0,       0.0],
+            [0.0,       sig_xy**2, 0.0],
+            [0.0,       0.0,       sig_yaw**2],
+        ]
+
+        # P = F P F^T + Q
+        P = self.P
+        FP = matmul(F, P)
+        FPFt = matmul(FP, transpose(F))
+        Pn = matadd(FPFt, Q)
+
+        self.x, self.y, self.yaw = x, y, yaw
+        self.P = Pn
+
+    # ---------- EKF: Measurement update (yaw only) ----------
+    def measurement_update(self, z_yaw: float):
+        # H = [0 0 1]
+        # innovation
+        nu = wrap_to_pi(z_yaw - self.yaw)
+
+        # S = H P H^T + R = P33 + R
+        R = (self.r_yaw ** 2)
+        S = self.P[2][2] + R
+        if S <= 1e-12:
+            return
+
+        # K = P H^T / S -> column = [P13, P23, P33]^T / S
+        K = [self.P[0][2] / S, self.P[1][2] / S, self.P[2][2] / S]
+
+        # state update
+        self.x += K[0] * nu
+        self.y += K[1] * nu
+        self.yaw = wrap_to_pi(self.yaw + K[2] * nu)
+
+        # covariance update: P = (I - K H) P
+        # (I - K H) = [[1,0,-K0],[0,1,-K1],[0,0,1-K2]]
+        KH = [
+            [0.0, 0.0, K[0]],
+            [0.0, 0.0, K[1]],
+            [0.0, 0.0, K[2]],
+        ]
+        I = [[1.0,0.0,0.0],[0.0,1.0,0.0],[0.0,0.0,1.0]]
+        IminusKH = matsub(I, KH)
+        self.P = matmul(IminusKH, self.P)
+
+    def publish_state(self, stamp_msg):
+        # publish odom_ekf + TF + path
+        odom = Odometry()
+        odom.header.stamp = stamp_msg
+        odom.header.frame_id = self.odom_frame
+        odom.child_frame_id = self.base_frame
+
+        odom.pose.pose.position.x = self.x
+        odom.pose.pose.position.y = self.y
+
+        q = quaternion_from_euler(0.0, 0.0, self.yaw)
+        odom.pose.pose.orientation.x = q[0]
+        odom.pose.pose.orientation.y = q[1]
+        odom.pose.pose.orientation.z = q[2]
+        odom.pose.pose.orientation.w = q[3]
+
+        self.odom_pub.publish(odom)
+
+        tfm = TransformStamped()
+        tfm.header.stamp = stamp_msg
+        tfm.header.frame_id = self.odom_frame
+        tfm.child_frame_id = self.base_frame
+        tfm.transform.translation.x = self.x
+        tfm.transform.translation.y = self.y
+        tfm.transform.rotation.x = q[0]
+        tfm.transform.rotation.y = q[1]
+        tfm.transform.rotation.z = q[2]
+        tfm.transform.rotation.w = q[3]
+        self.tf_br.sendTransform(tfm)
+
+        if self.publish_path:
+            ps = PoseStamped()
+            ps.header.stamp = stamp_msg
+            ps.header.frame_id = self.odom_frame
+            ps.pose = odom.pose.pose
+
+            self.path_msg.header.stamp = stamp_msg
+            self.path_msg.poses.append(ps)
+            if len(self.path_msg.poses) > 20000:
+                self.path_msg.poses = self.path_msg.poses[-20000:]
+            self.path_pub.publish(self.path_msg)
+
+
+# --------- tiny matrix utils (3x3 only) ----------
+def transpose(A):
+    return [list(row) for row in zip(*A)]
+
+def matmul(A, B):
+    n = len(A)
+    m = len(B[0])
+    k = len(B)
+    out = [[0.0]*m for _ in range(n)]
+    for i in range(n):
+        for j in range(m):
+            s = 0.0
+            for kk in range(k):
+                s += A[i][kk]*B[kk][j]
+            out[i][j] = s
+    return out
+
+def matadd(A, B):
+    return [[A[i][j] + B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
+
+def matsub(A, B):
+    return [[A[i][j] - B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
+
+
+def main():
+    rclpy.init()
+    node = EkfYawFusion()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

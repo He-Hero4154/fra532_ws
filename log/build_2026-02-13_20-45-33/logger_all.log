@@ -1,0 +1,230 @@
+[0.083s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.083s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f4520e3ee90>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f4520e3e890>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f4520e3e890>>)
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.190s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.190s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/hero/fra532_ws'
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.197s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['ignore', 'ignore_ament_install']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'ignore'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'ignore_ament_install'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['colcon_pkg']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'colcon_pkg'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['colcon_meta']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'colcon_meta'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['ros']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'ros'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['cmake', 'python']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'cmake'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'python'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extensions ['python_setup_py']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data) by extension 'python_setup_py'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['ignore', 'ignore_ament_install']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'ignore'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'ignore_ament_install'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['colcon_pkg']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'colcon_pkg'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['colcon_meta']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'colcon_meta'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['ros']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'ros'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['cmake', 'python']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'cmake'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'python'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extensions ['python_setup_py']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET) by extension 'python_setup_py'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['ignore', 'ignore_ament_install']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'ignore'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'ignore_ament_install'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['colcon_pkg']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'colcon_pkg'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['colcon_meta']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'colcon_meta'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['ros']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'ros'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['cmake', 'python']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'cmake'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'python'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extensions ['python_setup_py']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq00) by extension 'python_setup_py'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['ignore', 'ignore_ament_install']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'ignore'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'ignore_ament_install'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['colcon_pkg']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'colcon_pkg'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['colcon_meta']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'colcon_meta'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['ros']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'ros'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['cmake', 'python']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'cmake'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'python'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extensions ['python_setup_py']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq01) by extension 'python_setup_py'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['ignore', 'ignore_ament_install']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'ignore'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'ignore_ament_install'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['colcon_pkg']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'colcon_pkg'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['colcon_meta']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'colcon_meta'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['ros']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'ros'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['cmake', 'python']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'cmake'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'python'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extensions ['python_setup_py']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(data/FRA532_LAB1_DATASET/fibo_floor3_seq02) by extension 'python_setup_py'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.199s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['ignore', 'ignore_ament_install']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'ignore'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'ignore_ament_install'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['colcon_pkg']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'colcon_pkg'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['colcon_meta']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'colcon_meta'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['ros']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'ros'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['cmake', 'python']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'cmake'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'python'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extensions ['python_setup_py']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB) by extension 'python_setup_py'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['ignore', 'ignore_ament_install']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'ignore'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'ignore_ament_install'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['colcon_pkg']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'colcon_pkg'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['colcon_meta']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'colcon_meta'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['ros']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'ros'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['cmake', 'python']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'cmake'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'python'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extensions ['python_setup_py']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/FRA532_LAB/pic) by extension 'python_setup_py'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extensions ['ignore', 'ignore_ament_install']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extension 'ignore'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extension 'ignore_ament_install'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extensions ['colcon_pkg']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extension 'colcon_pkg'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extensions ['colcon_meta']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extension 'colcon_meta'
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extensions ['ros']
+[0.200s] Level 1:colcon.colcon_core.package_identification:_identify(src/lab1_amr) by extension 'ros'
+[0.202s] DEBUG:colcon.colcon_core.package_identification:Package 'src/lab1_amr' with type 'ros.ament_python' and name 'lab1_amr'
+[0.202s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.202s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.202s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.202s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.202s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.215s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.216s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.227s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/hero/fra532_ws/install
+[0.228s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 25 installed packages in /home/hero/ros2_ws/install
+[0.229s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 323 installed packages in /opt/ros/humble
+[0.230s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_args' from command line to 'None'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_target' from command line to 'None'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_clean_cache' from command line to 'False'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_clean_first' from command line to 'False'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'cmake_force_configure' from command line to 'False'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'ament_cmake_args' from command line to 'None'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'catkin_cmake_args' from command line to 'None'
+[0.257s] Level 5:colcon.colcon_core.verb:set package 'lab1_amr' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.257s] DEBUG:colcon.colcon_core.verb:Building package 'lab1_amr' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hero/fra532_ws/build/lab1_amr', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hero/fra532_ws/install/lab1_amr', 'merge_install': False, 'path': '/home/hero/fra532_ws/src/lab1_amr', 'symlink_install': True, 'test_result_base': None}
+[0.257s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.258s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.258s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/hero/fra532_ws/src/lab1_amr' with build type 'ament_python'
+[0.258s] Level 1:colcon.colcon_core.shell:create_environment_hook('lab1_amr', 'ament_prefix_path')
+[0.259s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.260s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/ament_prefix_path.ps1'
+[0.260s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/ament_prefix_path.dsv'
+[0.260s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/ament_prefix_path.sh'
+[0.261s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.261s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.431s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/hero/fra532_ws/src/lab1_amr'
+[0.431s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.431s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.676s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hero/fra532_ws/build/lab1_amr': PYTHONPATH=/home/hero/fra532_ws/build/lab1_amr/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hero/fra532_ws/install/lab1_amr/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hero/fra532_ws/build/lab1_amr/build --no-deps symlink_data
+[0.941s] Level 1:colcon.colcon_core.shell:create_environment_hook('lab1_amr', 'pythonpath_develop')
+[0.942s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/build/lab1_amr/share/lab1_amr/hook/pythonpath_develop.ps1'
+[0.942s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hero/fra532_ws/build/lab1_amr' returned '0': PYTHONPATH=/home/hero/fra532_ws/build/lab1_amr/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/hero/fra532_ws/install/lab1_amr/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/hero/fra532_ws/build/lab1_amr/build --no-deps symlink_data
+[0.943s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hero/fra532_ws/build/lab1_amr/share/lab1_amr/hook/pythonpath_develop.dsv'
+[0.943s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/build/lab1_amr/share/lab1_amr/hook/pythonpath_develop.sh'
+[0.945s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr' for CMake module files
+[0.945s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr' for CMake config files
+[0.945s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr/lib'
+[0.945s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr/bin'
+[0.945s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr/lib/pkgconfig/lab1_amr.pc'
+[0.946s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr/lib/python3.10/site-packages'
+[0.946s] Level 1:colcon.colcon_core.shell:create_environment_hook('lab1_amr', 'pythonpath')
+[0.946s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/pythonpath.ps1'
+[0.946s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/pythonpath.dsv'
+[0.946s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/hook/pythonpath.sh'
+[0.946s] Level 1:colcon.colcon_core.environment:checking '/home/hero/fra532_ws/install/lab1_amr/bin'
+[0.946s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(lab1_amr)
+[0.947s] INFO:colcon.colcon_core.shell:Creating package script '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/package.ps1'
+[0.947s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/package.dsv'
+[0.948s] INFO:colcon.colcon_core.shell:Creating package script '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/package.sh'
+[0.948s] INFO:colcon.colcon_core.shell:Creating package script '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/package.bash'
+[0.949s] INFO:colcon.colcon_core.shell:Creating package script '/home/hero/fra532_ws/install/lab1_amr/share/lab1_amr/package.zsh'
+[0.949s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hero/fra532_ws/install/lab1_amr/share/colcon-core/packages/lab1_amr)
+[0.949s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[0.949s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[0.949s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[0.949s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[0.954s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.954s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.954s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[0.967s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[0.967s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hero/fra532_ws/install/local_setup.ps1'
+[0.967s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/hero/fra532_ws/install/_local_setup_util_ps1.py'
+[0.968s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hero/fra532_ws/install/setup.ps1'
+[0.969s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hero/fra532_ws/install/local_setup.sh'
+[0.970s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/hero/fra532_ws/install/_local_setup_util_sh.py'
+[0.970s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hero/fra532_ws/install/setup.sh'
+[0.971s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hero/fra532_ws/install/local_setup.bash'
+[0.971s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hero/fra532_ws/install/setup.bash'
+[0.972s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hero/fra532_ws/install/local_setup.zsh'
+[0.973s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hero/fra532_ws/install/setup.zsh'

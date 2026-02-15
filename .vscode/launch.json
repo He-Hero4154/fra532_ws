@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run: Wheel Odom (sim time)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/lab1_amr/lab1_amr/wheel_odom.py",
+      "console": "integratedTerminal",
+      "env": {
+        "ROS_LOCALHOST_ONLY": "0"
+      },
+      "args": []
+    }
+  ]
+}
