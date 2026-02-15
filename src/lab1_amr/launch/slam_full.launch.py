@@ -16,10 +16,12 @@ def generate_launch_description():
     wheel_params = os.path.join(pkg_lab, "config", "wheel_params.yaml")
     ekf_params = os.path.join(pkg_lab, "config", "ekf_params.yaml")
     icp_params = os.path.join(pkg_lab, "config", "icp_params.yaml")
+    icp_map_params = os.path.join(pkg_lab, "config", "icp_map_params.yaml")
 
     # slam toolbox default config fallback
     slam_default = os.path.join(pkg_slam, "config", "mapper_params_online_async.yaml")
-    slam_params = slam_default  # ใช้ของ slam_toolbox ไปก่อนก็ได้
+    # NOTE: override ได้จาก launch arg (จะใช้ของ slam_toolbox หรือของเราเองก็ได้)
+    slam_params = LaunchConfiguration("slam_params_file")
 
     default_rviz = os.path.join(pkg_lab, "rviz", "lab1.rviz")
 
@@ -32,6 +34,13 @@ def generate_launch_description():
     odom_frame = LaunchConfiguration("odom_frame")
     map_frame = LaunchConfiguration("map_frame")
     scan_topic = LaunchConfiguration("scan_topic")
+
+    # loop closure toggle (slam_toolbox)
+    do_loop_closing = LaunchConfiguration("do_loop_closing")
+
+    # enable/disable nodes
+    enable_slam = LaunchConfiguration("enable_slam")
+    enable_icp_mapping = LaunchConfiguration("enable_icp_mapping")
 
     # static TF base_frame -> base_scan (จำเป็นมาก เพราะ dataset ไม่มี /tf_static ให้)
     publish_static_tf = LaunchConfiguration("publish_static_tf")
@@ -46,7 +55,6 @@ def generate_launch_description():
         output="screen",
         condition=IfCondition(PythonExpression(["'", bag_path, "' != ''"])),
     )
-
     play_bag_delayed = TimerAction(period=2.0, actions=[play_bag])
 
     # 1) wheel odom (สร้าง odom->base_link_wheel)
@@ -110,10 +118,43 @@ def generate_launch_description():
                 "odom_frame": odom_frame,
                 "map_frame": map_frame,
                 "scan_topic": scan_topic,
+                # key toggle: loop closure on/off
+                "do_loop_closing": do_loop_closing,
             },
         ],
+        condition=IfCondition(enable_slam),
     )
     slam_delayed = TimerAction(period=3.0, actions=[slam])
+
+    # 5.25) SLAM pose output (Path/Odom) from TF: map -> odom -> base_frame
+    slam_pose = Node(
+        package="lab1_amr",
+        executable="slam_pose_from_tf",
+        name="slam_pose_from_tf",
+        output="screen",
+        parameters=[
+            {
+                "use_sim_time": use_sim_time,
+                "map_frame": map_frame,
+                "base_frame": base_frame,
+                "odom_topic": "/odom_slam",
+                "path_topic": "/path_slam",
+                "rate_hz": 5.0,
+            }
+        ],
+        condition=IfCondition(enable_slam),
+    )
+    slam_pose_delayed = TimerAction(period=4.0, actions=[slam_pose])
+
+    # 5.5) ICP mapping (dead-reckoning mapping, no global correction)
+    icp_mapper = Node(
+        package="lab1_amr",
+        executable="icp_mapper",
+        name="icp_mapper",
+        output="screen",
+        parameters=[icp_map_params, {"use_sim_time": use_sim_time}],
+        condition=IfCondition(enable_icp_mapping),
+    )
 
     # 6) RViz
     rviz = Node(
@@ -131,6 +172,14 @@ def generate_launch_description():
             DeclareLaunchArgument("bag_path", default_value=""),
             DeclareLaunchArgument("rviz_config", default_value=default_rviz),
 
+            # allow switching slam param yaml
+            DeclareLaunchArgument("slam_params_file", default_value=slam_default),
+
+            # toggles
+            DeclareLaunchArgument("enable_slam", default_value="true"),
+            DeclareLaunchArgument("do_loop_closing", default_value="true"),
+            DeclareLaunchArgument("enable_icp_mapping", default_value="true"),
+
             DeclareLaunchArgument("base_frame", default_value="base_link_icp"),
             DeclareLaunchArgument("odom_frame", default_value="odom"),
             DeclareLaunchArgument("map_frame", default_value="map"),
@@ -146,9 +195,11 @@ def generate_launch_description():
             wheel,
             ekf,
             icp,
+            icp_mapper,
             static_tf,
             play_bag_delayed,
             slam_delayed,
+            slam_pose_delayed,
             rviz,
         ]
     )

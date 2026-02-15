@@ -31,6 +31,8 @@ setup(
         'wheel_odom = lab1_amr.wheel_odom:main',
         'ekf_yaw_fusion = lab1_amr.ekf_yaw_fusion:main',
         'icp_odom = lab1_amr.icp_odom:main',
+        'icp_mapper = lab1_amr.icp_mapper:main',
+        'slam_pose_from_tf = lab1_amr.slam_pose_from_tf:main',
         ],
     },
 )

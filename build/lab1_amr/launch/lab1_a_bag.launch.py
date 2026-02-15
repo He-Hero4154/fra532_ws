@@ -1,1 +1,0 @@
-/home/hero/fra532_ws/src/lab1_amr/launch/lab1_a_bag.launch.py

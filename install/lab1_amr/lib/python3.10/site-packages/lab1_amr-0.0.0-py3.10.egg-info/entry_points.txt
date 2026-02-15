@@ -1,5 +1,0 @@
-[console_scripts]
-ekf_yaw_fusion = lab1_amr.ekf_yaw_fusion:main
-icp_odom = lab1_amr.icp_odom:main
-wheel_odom = lab1_amr.wheel_odom:main
-
